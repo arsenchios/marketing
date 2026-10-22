@@ -1,0 +1,40 @@
+import { createServer } from 'vite';
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+const server=await createServer({server:{host:'127.0.0.1',port:4339},configFile:false});
+await server.listen();
+const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+try {
+const page=await browser.newPage();
+await page.goto('http://127.0.0.1:4339');
+const result=await page.evaluate(async()=>{
+const {Compositor}=await import('/src/compositor.ts');
+const {initialEvent}=await import('/shared/contracts.ts');
+const source=document.createElement('canvas');source.width=1280;source.height=720;
+const s=source.getContext('2d');s.fillStyle='red';s.fillRect(0,0,640,720);s.fillStyle='blue';s.fillRect(640,0,640,720);
+const preview=document.createElement('canvas');
+const c=new Compositor(preview,{...initialEvent,hostName:'Test'});
+c.video.srcObject=source.captureStream(25);await c.video.play();
+await new Promise(r=>setTimeout(r,150));
+c.layout='camera';c.draw();
+const pixel=(canvas,x,y)=>Array.from(canvas.getContext('2d').getImageData(x,y,1,1).data).slice(0,3);
+const full={local:pixel(preview,100,200),out:pixel(c.broadcastCanvas,100,200)};
+c.slideCanvas=document.createElement('canvas');c.slideCanvas.width=1280;c.slideCanvas.height=720;
+const slide=c.slideCanvas.getContext('2d');slide.fillStyle='green';slide.fillRect(0,0,640,720);slide.fillStyle='yellow';slide.fillRect(640,0,640,720);
+c.layout='slides';c.cameraBox={x:.7,y:.7,width:.2};c.draw();
+const slides={local:pixel(preview,100,200),out:pixel(c.broadcastCanvas,100,200),camera:pixel(preview,920,550)};
+c.layout='camera';c.audio=new AudioContext();c.destination=c.audio.createMediaStreamDestination();await c.audio.resume();const tone=c.audio.createOscillator();tone.connect(c.destination);tone.start();
+c.draw();
+const chunks=[];const rec=new MediaRecorder(new MediaStream(c.stream().getVideoTracks()), {mimeType:"video/webm;codecs=vp8"});rec.ondataavailable=e=>chunks.push(e.data);rec.start();const timer=setInterval(()=>{c.draw();c.capture.getVideoTracks()[0].requestFrame?.();},40);await new Promise(r=>setTimeout(r,1000));clearInterval(timer);
+await new Promise(r=>{rec.onstop=r;rec.stop()});
+const v=document.createElement('video');v.muted=true;v.src=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));await v.play();await new Promise(r=>setTimeout(r,250));
+const frame=document.createElement('canvas');frame.width=1280;frame.height=720;frame.getContext('2d').drawImage(v,0,0);const recorded=pixel(frame,100,200);
+c.pauseForFinish(true);c.draw();const privateFrame=pixel(c.broadcastCanvas,100,200);
+c.dispose();source.captureStream().getTracks().forEach(t=>t.stop());
+return {full,slides,recorded,privateFrame};
+});
+assert(result.full.local[2]>250&&result.full.local[0]<5);assert(result.full.out[0]>250&&result.full.out[2]<5);
+assert.deepEqual(result.slides.local,result.slides.out);assert(result.slides.camera[2]>250&&result.slides.camera[0]<5);
+assert(result.recorded[0]>200&&result.recorded[2]<30,JSON.stringify(result));assert.deepEqual(result.privateFrame,[0,0,0]);
+console.log('PASS: mirrored local camera, unchanged slides, unmirrored captured recording, privacy black frame');
+}finally {await browser.close();await server.close();}

@@ -1,0 +1,55 @@
+{
+  "name": "arslive",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "tsx server/index.ts",
+    "build": "tsc --noEmit && vite build",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "check": "tsc --noEmit",
+    "test:ui": "node tests/browser-smoke.mjs",
+    "format": "prettier --write src server shared tests vite.config.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1149.0",
+    "@aws-sdk/lib-storage": "^3.1149.0",
+    "@aws-sdk/s3-request-presigner": "^3.1149.0",
+    "express": "^5.1.0",
+    "google-auth-library": "^11.3.0",
+    "hls.js": "^1.6.13",
+    "lucide-react": "^0.468.0",
+    "multer": "^2.0.2",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.4.299",
+    "pg": "^8.23.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sharp": "^0.35.5",
+    "ws": "^8.18.3",
+    "yauzl": "^3.4.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.9",
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.10.0",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/ws": "^8.18.1",
+    "@types/yauzl": "^3.4.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "playwright": "^1.64.0",
+    "prettier": "^3.9.9",
+    "ts-morph": "^28.0.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12"
+  }
+}

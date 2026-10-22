@@ -1,0 +1,383 @@
+/* ArsLive — warm paper, champagne metal and calm motion.
+   Layout/interaction rules remain in the shared studio stylesheets. */
+:root {
+  color-scheme: light;
+  color: #352e27;
+  background: #f7f5ef;
+  --text: #352e27;
+  --accent: #a5793d;
+  --muted: #756e64;
+  --line: #e5dfd4;
+  --panel: #fffefa;
+  --soft: #f3efe6;
+  --sage: #397c62;
+  --gold: linear-gradient(120deg, #f0deb5, #dfbd7d 65%, #cda36b);
+  --shadow: 0 10px 34px -20px #75634b30;
+}
+html { background: #f7f5ef; }
+body {
+  color: var(--text);
+  background: radial-gradient(ellipse 70% 700px at 95% -10%, #e8d8b14a, transparent), #f7f5ef;
+  min-width: 320px;
+}
+::selection { background: #ead7ad; color: #352e27; }
+h1, h2, h3 { color: #352e27; }
+h1 { font-weight: 550; letter-spacing: -.055em; }
+h2, h3 { letter-spacing: -.035em; }
+.gold-text { background: none; -webkit-text-fill-color: #9a703a; color: #9a703a; }
+.eyebrow, .tiny-label { color: #916d3e; letter-spacing: .13em; }
+.muted, .dim, .local-tag { color: var(--muted); }
+input, textarea, select {
+  background: #fffefa;
+  color: #352e27;
+  border: 1px solid #dcd5c8;
+  border-radius: 13px;
+  box-shadow: 0 1px 2px #40301a04;
+}
+input::placeholder, textarea::placeholder { color: #8d8578; }
+input:focus, textarea:focus, select:focus {
+  border-color: #ae8244;
+  box-shadow: 0 0 0 3px #c7a7751f;
+}
+input[type=range] { accent-color: #a97f43; box-shadow: none; }
+input[type=checkbox], input[type=radio] { accent-color: #9d7338; }
+select option { background: #fffefa; color: #352e27; }
+button, a { transition: background-color .18s, border-color .18s, box-shadow .18s, color .18s, transform .18s; }
+.btn { border-radius: 12px; min-height: 42px; font-weight: 600; }
+.btn.primary, .join-page .btn.primary, .viewer-cta .btn.primary {
+  background: var(--gold); color: #46351e; border: 1px solid #c9a670;
+  box-shadow: inset 0 1px 0 #fff8, 0 6px 16px -10px #9d733c80;
+}
+.btn.primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 7px 20px -10px #9d733ca0; }
+.btn.quiet, .btn.small:not(.primary):not(.danger), .icon-btn, .control-btn, .help-button {
+  background: #fffdfa; border-color: #e1d9cb; color: #655540;
+}
+.btn.quiet:hover, .icon-btn:hover, .control-btn:hover, .help-button:hover { background: #f3ecdf; border-color: #cbb798; }
+.btn.danger, .studio-view-controls > .btn.danger, .studio-audience-links > .btn.danger {
+  color: #a63f38; background: #fff2ee; border-color: #edd0c9;
+}
+.btn.danger:hover { background: #fbe5dd; }
+.icon-btn.selected, .layout-switch button.selected, .control-btn.selected { background: #eee1c8; color: #6e4e25; border-color: #c9ae83; }
+.control-btn.off, .device-control .control-btn.off { color: #a54038; background: #f8ebe6; }
+.topbar {
+  min-height: 88px; background: #fffefaed; border-bottom: 1px solid #e8e1d4;
+  box-shadow: 0 2px 20px #44341a03; gap: 32px;
+}
+.brand.arslive-brand img { width: 172px; height: 44px; display: block; }
+.topbar nav { gap: 6px; align-self: center; padding: 5px; border: 1px solid #eae4d9; border-radius: 15px; background: #f5f2eb; }
+.topbar nav a { border: 0; border-radius: 10px; padding: 10px 18px; color: #7b7265; }
+.topbar nav a.active { color: #6e4d27; background: #fffefa; box-shadow: 0 2px 6px #5843290d; }
+.topbar nav a::after { display: none; }
+.topbar-end { gap: 16px; }
+.settings-button, .help-button { color: #786347; }
+.settings-button:hover { color: #382c1d; }
+.page { max-width: 1450px; padding-top: 44px; }
+.page-heading { margin-bottom: 32px; gap: 24px; align-items: center; }
+.page-heading .eyebrow { margin-bottom: 12px; font-size: 10px; }
+.page-heading h1 { font-size: clamp(32px, 3.5vw, 46px); }
+.page-heading p { color: #7c7367; margin-top: 12px; max-width: 620px; }
+.breadcrumbs { color: #857a6c; }
+.breadcrumbs a { color: #68543d; }
+.webinar-filters { gap: 10px; margin-bottom: 24px; }
+.webinar-filters button { border-radius: 24px; background: transparent; border-color: #e4ddcf; color: #7b7162; }
+.webinar-filters button.selected { color: #5d482b; border-color: #c9b287; background: #efe5d2; }
+.webinar-filters button span { color: #7b6341; background: #ffffff80; }
+.event-grid { gap: 24px; }
+.event-card, .form-section, .preview-card, .record-card, .stats-card, .stats-section {
+  background: #fffefa; color: #352e27; border: 1px solid #e5ded1;
+  border-radius: 22px; box-shadow: var(--shadow); overflow: hidden;
+}
+.event-card { transition: transform .22s, box-shadow .22s, border-color .22s; }
+.event-card:hover { transform: translateY(-3px); border-color: #cdbb9d; box-shadow: 0 18px 42px -24px #745a3d45; }
+.event-details { padding: 24px; }
+.event-details h2 { font-size: 22px; }
+.event-details p, .event-date, .record-card p, .stats-card small { color: #827668; }
+.event-card-bottom { border-color: #ece5d9; }
+.event-card-bottom > span { color: #6b5e4b; }
+.event-art, .preview-art, .join-art, .waiting-decor {
+  background: radial-gradient(ellipse at 85% 70%, #d5bc8430, transparent 65%), linear-gradient(130deg, #f2eddf, #e9dfc9);
+  color: #5a4b36;
+}
+.event-art-title, .event-art-title em, .join-art strong, .join-art em { color: #5e4b31; }
+.event-art-title { letter-spacing: -.04em; }
+.event-art-footer { color: #786141; }
+.event-orbit { border-color: #b89e6c35; }
+.event-sphere, .join-art .event-sphere, .waiting-decor .event-sphere {
+  background: radial-gradient(circle at 30% 23%, #fff5d8, #ddbf84 32%, #b18b4b 72%, #8d6c3c);
+  box-shadow: inset -12px -14px 35px #725b3933, 0 25px 45px -22px #99784e66;
+}
+.webinar-card-status .badge, .badge { background: #fffefaed; color: #746750; border: 1px solid #e1d7c4; }
+.badge.live { color: #a03c33; border-color: #edccc5; background: #fff2ed; }
+.badge.ended { color: #476a59; background: #f0f6ef; border-color: #cfded1; }
+.empty-state { background: #fffefa; border: 1px dashed #dbcfb9; border-radius: 24px; color: #7c705e; }
+.form-section { overflow: visible; }
+.form-section > summary, .form-section summary { color: #534631; }
+.section-number, .step-number { color: #94703c; background: #f1e8d7; border-color: #ddcdb0; }
+.form-section[open] > summary { border-color: #e9e0d1; }
+.upload-zone, .file-drop, .provider-card, .channel-options label, .check-card {
+  background: #f9f6ef; border-color: #e2d7c5; color: #66563f; border-radius: 14px;
+}
+.provider-card p, .provider-card small, .provider-card > div, .preview-card-body p, .preview-card-body > div { color: #7b6b54; }
+.channel-options label.selected { background: #eef5ee; border-color: #9cbda6; color: #315a40; }
+.channel-options label.selected strong, .channel-options label.selected > svg { color: #315a40; }
+.record-preview { background: #f2e8d5; color: #99723a; border-radius: 14px; }
+.stats-card svg { color: #9d773f; }
+.stats-bar, .stats-progress { background: #d8bb82; }
+.stats-table th { color: #7c6c54; }
+.stats-table tr { border-color: #e8e0d4; }
+.notice { background: #f4ecda; border: 1px solid #e5d7bb; color: #7a5b30; border-radius: 13px; }
+.notice.error, .error-text, .player-error { color: #a13e34; background: #fff0e9; border-color: #edc9bd; }
+.notice.success { color: #336847; background: #edf4eb; border-color: #caddc8; }
+.modal, .app-modal, .settings-dialog, .guide-dialog {
+  background: #fffefa; color: #352e27; border: 1px solid #e5dccb; border-radius: 24px;
+  box-shadow: 0 28px 90px #392d2533;
+}
+.modal-backdrop, .app-modal::backdrop, .settings-dialog::backdrop, .guide-dialog::backdrop {
+  background: #44382c5e; backdrop-filter: blur(6px);
+}
+.modal p, .app-modal p, .settings-dialog p, .guide-dialog p { color: #756b5c; }
+.app-modal label, .settings-dialog label { color: #544938; }
+.app-modal .btn.primary { color: #46351e; }
+.guide-tabs button, .guide-steps li { color: #74654e; border-color: #e4dbca; }
+.guide-tabs button.active { background: #eee3cc; color: #705125; }
+.channel-identity, .storage-status, .recording-storage, .youtube-status { color: #5a634b; background: #f2f4ec; border-color: #d9decf; }
+.invitation-panel, .deck-library, .speaker-panel, .guest-devices { background: #f8f4eb; border-color: #dfd4c1; color: #625640; border-radius: 16px; }
+.invitation-panel p, .invitation-panel small, .speaker-panel p, .guest-devices p { color: #7a6d58; }
+.invitation-dialog { background: transparent; }
+/* Studio controls stay in the same familiar places. Light surfaces frame the media. */
+.studio-page.is-focused, .studio-page.is-focused .studio-view-controls { background: #f7f5ef; }
+.studio-page .studio-main, .studio-page .stage-heading { background: #fffefa; color: #63573f; border-color: #e6ded0; }
+.studio-main { border-radius: 20px; border: 1px solid #e3d9c8; box-shadow: var(--shadow); }
+.stage-heading { padding: 13px 18px; }
+.studio-audience, .studio-audience b { color: #655a45; }
+.studio-audience-links .btn { color: #4f6b68; border-color: #d3dfd8; background: #f1f6f1; }
+.studio-control-dock { background: #fffefa; border-color: #e7dfd2; color: #62533d; }
+.studio-page .slide-strip { background: #f1eee6; border-color: #e0d8c8; }
+.studio-page .slide-controls, .studio-page .preflight-summary { background: #f8f4eb; color: #66553b; border-color: #e3d7c3; }
+.studio-control-dock .slide-controls, .studio-control-dock .camera-settings { background: transparent; }
+.studio-control-dock .camera-adjustments { background: #fffefa; border-color: #e2d8c5; box-shadow: 0 12px 24px #4a382522; }
+.device-control .device-select select, .device-select select { color: #6e5c43; background: #f6f1e7; border-color: #e4d9c4; }
+.device-select { color: #7b6c55; }
+.studio-main > .engagement-offer, .engagement-panel { background: linear-gradient(125deg, #f2e7d0, #fffaf0); border-color: #e2ceaa; color: #74552f; }
+.live-offer p, .chat-shortcuts p { color: #7c6c53; }
+.stage-preflight, .stage-preflight.has-preview {
+  background: #fffefaed; color: #443829; border-color: #daceb6; border-radius: 22px;
+  box-shadow: 0 22px 60px #5140262b; backdrop-filter: blur(18px);
+}
+.preflight-private, .preflight-step small, .preflight-tip, .preflight-note { color: #81725c; }
+.preflight-step { border-color: #e4dacc; background: #f8f4eb; border-radius: 14px; }
+.preflight-step-icon { color: #998469; }
+.preflight-step.done .preflight-step-icon, .preflight-checks .passed { color: #3f7955; }
+.preflight-step.checking .preflight-step-icon { color: #986c30; }
+.preflight-panel, .preflight-checks > * { background: #fffaf0; border-color: #e0d4be; color: #6e593a; }
+.preflight-summary .btn.quiet { background: #fffefa; }
+.preflight-problem { color: #9c542a; }
+.preflight-hide { color: #7d6c51; }
+.mobile-chat-bar { background: #f4eee2; color: #665333; border-color: #ded1b9; }
+.studio-page .studio-chat:not([hidden]) { background: #f7f5ef; }
+.launch-countdown { background: #faf7eff2; color: #514027; border-color: #dfcda7; }
+/* The conversation is a paper-like surface, with the composer visibly separate. */
+.chat-panel, .studio-chat .chat-panel, .studio-chat .chat-conversation {
+  background: #fffefa; color: #40372a; border-color: #e3dace; border-radius: 20px;
+}
+.chat-panel .chat-heading, .studio-chat .chat-heading { background: #f4f0e6; color: #524631; border-color: #e4dac8; }
+.chat-heading h2, .chat-heading .online, .chat-heading > div { color: #6a5a43; }
+.chat-panel .chat-scroll { scrollbar-color: #cdbd9e transparent; }
+.welcome-message { background: #f7f0e1; border: 1px solid #e6d8b9; color: #776044; border-radius: 14px; }
+.welcome-message p { color: #756047; }
+.chat-panel .message { border-color: #eee8dc; padding-top: 9px; padding-bottom: 9px; }
+.chat-panel .message:hover { background: #f8f5ed; }
+.chat-panel .message p { color: #514638; }
+.chat-panel .message p a, .chat-message p a { color: #876025; text-decoration: underline; text-underline-offset: 3px; }
+.chat-panel .message-top time { color: #9a8e7b; }
+.host-label { background: #eaf0e5; color: #4d6c42; }
+.chat-panel .message.held, .chat-panel .message.deleted { background: #f0eee8; color: #8a8277; }
+.chat-panel .moderate button { color: #978469; }
+.chat-panel .moderate button:hover { background: #eee2cb; color: #6e5026; }
+.chat-panel .chat-compose, .studio-chat .chat-compose { background: #faf7f0; border-color: #e5d9c5; }
+.chat-panel .chat-compose textarea { color: #4b3d2b; background: #fffefa; border-color: #d9cbb0; border-radius: 14px; }
+.chat-panel .chat-compose textarea:focus { background: #fffefa; border-color: #b38c50; }
+.chat-panel .chat-compose textarea::placeholder { color: #a09481; }
+.chat-panel .chat-send-row > button { background: var(--gold); color: #5b4324; border-radius: 11px; }
+.chat-panel .chat-send-row > button:disabled { color: #928979; background: #e8e2d7; opacity: 1; }
+.chat-compose > div > span { color: #7e7a62; }
+.chat-panel .chat-reactions button { background: transparent; border-color: transparent; }
+.chat-panel .chat-reactions button:hover, .chat-panel .chat-reactions button:focus-visible { background: #eee5d3; }
+.chat-empty, .chat-empty p, .chat-empty small { color: #9c907c; }
+.chat-new-messages { background: #ead3a5; border-color: #d3b47c; color: #674a24; box-shadow: 0 4px 16px #69492120; }
+.studio-chat .chat-host-tools { background: #eaf0ed; border-color: #d5dfd7; color: #546a5c; border-radius: 18px; }
+.studio-chat .chat-host-tools .engagement-templates, .studio-chat .chat-host-tools .chat-settings-row, .studio-chat .chat-host-tools .studio-chat-width { background: transparent; border-color: #d7dfd4; }
+.chat-shortcuts button, .chat-template-chip { background: #f9fcf8; border-color: #cdd8cc; color: #5a6d56; }
+.studio-chat-width output { color: #6f6945; }
+.chat-settings-row, .chat-demo { background: #f5f0e6; color: #786747; border-color: #dfd3bb; }
+.chat-demo-messages { background: #fffdfa; }
+.chat-demo-messages b, .chat-demo > strong { color: #7a603b; }
+/* Viewer and entry: retain actual video pixels, custom covers and event branding. */
+.viewer-header { background: #fffefa; border-color: #e5dccb; }
+.viewer-heading, .viewer-title, .viewer-event-title { color: #433a2d; }
+.viewer-live-meta, .viewer-live-bar, .viewer-status-bar { background: #f7f0e1; border-color: #e0d2b5; color: #705c3e; }
+.viewer-speaker, .viewer-speakers, .viewer-event-description, .viewer-description { color: #81715a; }
+.viewer-page footer, .join-page footer { color: #a08d70; border-color: #e8dfcf; }
+.viewer-player, .youtube-player-shell, .video-player { border-color: #ded3c0; border-radius: 18px; overflow: hidden; }
+.playback-controls, .player-controls, .player-toolbar { background: #f5efe2; color: #755f3b; border-color: #e0d2b5; }
+.playback-controls button, .player-controls button, .player-toolbar button { color: #755f3b; }
+.player-sound-hint { background: #fff9e9; color: #84632b; border-color: #d7be8f; }
+.waiting-screen { background: radial-gradient(ellipse at 90% 40%, #e5d4b44d, transparent 60%), #f5f0e5; color: #54432d; }
+.waiting-copy h2 { color: #54432d; }
+.waiting-copy p, .waiting-date, .waiting-copy .eyebrow { color: #93784e; }
+.waiting-icon { color: #aa8348; border-color: #d8c19b; background: #ead9b72e; }
+.join-card, .entry-card, .join-form { background: #fffefade; border-color: #e3d8c5; color: #645239; border-radius: 24px; box-shadow: var(--shadow); }
+.join-info h1, .join-card h2, .entry-card h2 { color: #4a3a26; }
+.join-card p, .join-info p, .entry-card p { color: #89785f; }
+.join-countdown, .countdown { color: #9d793f; }
+.viewer-cta, .ended-offer, .finished-screen { background: linear-gradient(130deg, #fffaf0, #eee0c4); color: #60482c; border-color: #d9c29a; border-radius: 24px; }
+/* Brand entrance: decorative scene is CSS only and never covers interactions. */
+.login-page { min-height: 100svh; background: radial-gradient(ellipse at 77% 43%, #ead6a64f, transparent 54%), #f8f6ef; overflow: hidden; }
+.login-page > .brand { position: relative; z-index: 2; }
+.login-content { position: relative; z-index: 2; max-width: 660px; }
+.login-content h1 { color: #3a3025; font-size: clamp(46px, 5.2vw, 78px); line-height: 1.12; letter-spacing: -.05em; margin-top: 22px; }
+.login-content h1 em { background: none; -webkit-text-fill-color: #9f7b46; color: #9f7b46; font-family: Georgia, serif; font-weight: 400; letter-spacing: -.045em; }
+.login-content > p { color: #897b65; max-width: 420px; font-size: 16px; line-height: 1.8; }
+.login-content > small { color: #9b8a70; }
+.login-content .btn.large { padding: 17px 26px; min-height: 54px; }
+.login-art { overflow: visible; pointer-events: none; }
+.login-art .orb { background: radial-gradient(circle at 28% 20%, #fff8dd, #dfbf7f 28%, #b79353 65%, #8f713e); box-shadow: inset -22px -25px 60px #7a5f4229, 0 40px 70px -25px #b18f4f55; animation: ars-float 12s ease-in-out infinite; }
+.login-art .orbit, .login-art .orbit.two { border-color: #c6aa7140; }
+.login-art .orbit { background: linear-gradient(140deg, #fff7, transparent 55%); box-shadow: inset 0 1px 0 #fff; }
+.login-art-label { position: absolute; top: 18%; left: 15%; border: 1px solid #ded1b8; background: #fffdf3b8; border-radius: 28px; padding: 14px 20px; color: #8a6b37; letter-spacing: .14em; font-size: 10px; backdrop-filter: blur(12px); }
+.login-art-label span { display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: #9c8152; }
+.login-art-note { position: absolute; bottom: 12%; right: 5%; display: flex; align-items: center; gap: 16px; padding: 22px 28px; border: 1px solid #fff; border-radius: 20px; background: #fffefaad; box-shadow: 0 20px 60px #8d71301a; color: #ab8b56; backdrop-filter: blur(18px); font-size: 12px; line-height: 1.8; transform: rotate(-4deg); }
+.login-art-note b { color: #766346; font-weight: 500; }
+.login-page footer { color: #8e7e65; display: flex; gap: 24px; font-size: 12px; }
+.login-page footer span { color: #ac9d86; }
+.workspace-loading { background: #f8f6ef; color: #8a7656; }
+@keyframes ars-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+@keyframes ars-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: no-preference) {
+  .login-content { animation: ars-enter .6s ease-out both; }
+  .dashboard .page-heading { animation: ars-enter .4s ease-out both; }
+  .event-card { animation: ars-enter .45s ease-out both; }
+  .event-card:nth-child(2) { animation-delay: .06s; }
+  .event-card:nth-child(3) { animation-delay: .12s; }
+}
+@media (max-width: 1000px) {
+  .topbar { gap: 18px; }
+  .topbar nav a { padding: 9px 12px; }
+  .brand.arslive-brand img { width: 145px; height: auto; }
+  .login-art-note { right: 12%; padding: 16px; }
+}
+@media (max-width: 700px) {
+  .topbar { min-height: 78px; padding: 15px 18px; gap: 12px; }
+  .topbar nav { order: 3; width: 100%; justify-content: center; }
+  .topbar nav a { padding: 9px 14px; }
+  .topbar-end { margin-left: auto; gap: 12px; }
+  .page { padding-top: 28px; }
+  .page-heading { align-items: flex-start; gap: 18px; }
+  .page-heading h1 { font-size: 34px; }
+  .event-grid { gap: 18px; }
+  .event-card, .form-section, .preview-card, .stats-section, .record-card { border-radius: 18px; }
+  .event-details { padding: 20px; }
+  .login-content h1 { font-size: clamp(42px, 9vw, 62px); }
+  .login-content > p { font-size: 15px; max-width: 350px; }
+  .login-art { opacity: .38; }
+  .login-art-label, .login-art-note { display: none; }
+  .login-page footer { flex-direction: column; gap: 6px; }
+  .viewer-page .viewer-player { border-radius: 14px; }
+  .viewer-page .chat-panel { border-radius: 14px; }
+  .app-modal, .settings-dialog, .guide-dialog { border-radius: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+/* Public pages and remaining settings use the same light surfaces. */
+.viewer-page, .join-page { background: radial-gradient(ellipse at 90% 0%, #ead9b730, transparent 60%), #f7f5ef; }
+.join-page > header, .join-page > footer, .viewer-footer, .page-footer { border-color: #e4ddcf; }
+.join-intro > p, .join-form > p, .join-form > small, .join-date { color: #776953; }
+.join-form h2 { color: #51422e; }
+.join-art { border-color: #dfd1b6; border-radius: 20px; }
+.join-art > span { color: #6b5636; }
+.join-art > span em { color: #9d793f; }
+.join-form { background: #fffefa; }
+.start-countdown { color: #94703b; }
+.field, .field > small, .save-bar > span { color: #7c6d57; }
+.field-hint, .form-section .field-hint { color: #817259; }
+.form-section .step-label { color: #96723b; background: #f4ead7; border-color: #e1cda7; }
+.save-bar { background: #f1eadc; border: 1px solid #e1d3bc; border-radius: 16px; }
+.empty-state h2 { color: #685337; }
+.topbar nav { height: auto; }
+.topbar nav a { min-height: 38px; }
+.login-art-note { right: 20%; }
+.stage-heading .timer { color: #776747; }
+.layout-switch { background: #f3ecdf; border-color: #ddcfb6; border-radius: 10px; }
+.layout-switch button { color: #827052; }
+.device-control, .studio-control-dock .device-control { background: #f8f4eb; border-color: #e0d5c2; border-radius: 10px; }
+.device-control .control-btn { color: #715d3d; }
+.device-picker { border-color: #e1d6c2; }
+.device-picker summary { color: #88775c; }
+.device-options { background: #fffefa; border-color: #ded0b6; border-radius: 14px; box-shadow: 0 12px 32px #5a44252b; }
+.device-options button { color: #66543a; }
+.device-options button svg { color: #a17a3c; }
+.device-options button:hover, .device-options button:focus-visible { background: #f4ecde; }
+.device-options button[aria-pressed=true] { background: #f0e3cb; }
+.slides-row, .studio-page .slides-row { background: #f2eee5; border-color: #e0d7c5; }
+.thumbnail-size { background: #f8f4eb; border-color: #ded2bc; }
+.signal-bar { background: #f1eee6; color: #7c6e55; border-color: #e1d9c9; }
+.signal-bar .signal { color: #70644e; }
+.broadcast-help, .broadcast-help summary { color: #847251; border-color: #e8dece; }
+.stats-filters { background: #f1ecdf; border: 1px solid #ded5c3; border-radius: 16px; }
+.stats-chart-detail, .stats-chart-labels, .stats-empty, .stats-breakdown { color: #7e6c50; }
+.stats-table-wrap { border-color: #e4dbca; }
+.stats-table-wrap th { color: #8a795d; }
+.stats-table-wrap td { color: #65543a; border-color: #e9e1d4; }
+.stats-chart button { background: #ddc38e; }
+.stats-chart button:hover, .stats-chart button[aria-pressed=true] { background: #aa8244; }
+.admin-event-list article, .admin-events article, .client-event-list article { background: #fffefa; border-color: #e1d8c7; border-radius: 18px; }
+.connection-settings, .connection-body, .settings-content, .guide-content { color: #6b5a41; background: #fffefa; border-color: #e5d9c6; }
+.connection-settings h3, .connection-settings h2, .connection-settings strong { color: #5e4b31; }
+.channel-hint, .admin-entry, .channel-choice, .client-access-list { background: #f8f3e8; color: #7c6747; border-color: #e1d3b8; border-radius: 12px; }
+.connection-settings p, .settings-intro, .channel-choice span, .settings-logout { color: #817056; }
+.outline-icon { color: #a78143; background: #f5ecd8; border-color: #decca6; }
+.viewer-header .event-heading p { color: #817059; }
+.viewer-session-bar { background: #f4eee0; border-color: #e3d5bc; }
+.viewer-session-bar .viewer-stream-status, .viewer-presenters small, .live-elapsed { color: #7b6a4e; }
+.viewer-stream-status.is-live strong { color: #b34537; }
+.viewer-header .event-brand { color: #6d5331; }
+.viewer-header .event-brand span { font-size: 17px; }
+.viewer-presenters strong { color: #4e402c; }
+.broadcast-loading { background: radial-gradient(ellipse at 70% 30%, #e6d5ad55, transparent), #faf7ef; color: #645030; }
+.broadcast-loading p { color: #8b7758; }
+.broadcast-spinner { border-color: #ddd0b6; border-top-color: #a98141; }
+.webinar-end-screen, .viewer-end-offer { background: linear-gradient(130deg, #fffaf0, #eee0c4); color: #665032; border-color: #ddc7a2; }
+.webinar-end-screen h2, .webinar-end-offer h3 { color: #5d4527; }
+.webinar-end-screen > p, .webinar-end-offer p { color: #8b7151; }
+.viewer-page .playback-controls { border-top-color: #dfd1b6; }
+.viewer-page .chat-panel .chat-heading, .viewer-page .chat-panel .chat-compose { border-color: #e7ddca; }
+@media(max-width:700px) {
+  .topbar nav { margin-left: 0; margin-right: 0; }
+  .viewer-header .event-brand span { font-size: 13px; }
+}
+.admin-webinars article { background: #fffefa; border-color: #e1d8c7; border-radius: 18px; box-shadow: var(--shadow); }
+.guide-steps { border-color: #e4d9c4; }
+.guide-steps button, .guide-steps button span { color: #857456; }
+.guide-steps button[aria-pressed=true], .guide-steps button[aria-pressed=true] span { color: #4e6e4f; }
+.guide-steps button[aria-pressed=true] { background: #edf3e9; border-color: #d1dec9; border-radius: 10px; }
+.guide-steps button:hover { color: #725a36; background: #f5eee0; }
+.guide-detail p, .guide-detail li, .guide-scope p { color: #7b6a50; }
+.guide-scope { border-color: #e3d8c2; }
+.guide-scope strong { color: #5b6549; }
+.guide-next { color: #a27b39; background: #f7efde; border-color: #d9c393; }
+.invitation-person, .invitation-member { background: #f5f0e4; color: #68563b; border-color: #e0d0b2; }
+.invitation-link input { color: #705b3c; background: #fffefa; border-color: #ddccac; }
+.invitation-control { color: #6e5d42; }
+.invitation-person small, .invitation-member small { color: #89775b; }
+.audience-test-switch, .audience-settings .field-hint { color: #776548; }
+.audience-settings input[type=checkbox] { accent-color: #a5793d; }
+.chat-shortcuts .chat-template, .chat-host-tools .template-title { color: #4a6b56; }
+.dashboard > footer { border-color: #e1d7c6; }
+.event-details > .btn { margin: 8px 4px 0 0; }
+.viewer-stage { border-color: #ddd0b7; }
+.viewer-page .btn.primary { background: var(--gold); color: #46351e; border-color: #c9a670; }
+.channel-hint summary, .client-access-list summary, .team-settings summary, .connection-body details > summary { color: #8a6938; }
+.admin-entry { padding: 18px; }
+.invitation-panel .invitation-member { border-color: #e0d0b2; }
+@media (max-width:700px) { .login-art { opacity: .25; } }

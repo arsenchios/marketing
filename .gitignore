@@ -1,0 +1,14 @@
+node_modules/
+.pnpm-store/
+dist/
+.data/
+.env
+.env.*
+!.env.example
+test-results/
+.DS_Store
+coverage/
+*.log
+*.sqlite
+*.sqlite-*
+*.db
